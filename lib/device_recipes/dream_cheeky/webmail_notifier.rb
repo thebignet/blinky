@@ -3,23 +3,23 @@ module Blinky
     module WebmailNotifier
 
       def success!
-        colour!("\x00\xFF\x00") 
+        colourRGB!("00FF00")
       end
 
       def failure!
-        colour!("\xFF\x00\x00") 
+        colourRGB!("FF0000")
       end
 
       def building! 
-        colour!("\x00\x00\xFF") 
+        colourRGB!("0000FF")
       end
 
       def warning!
-        colour!("\xFF\x2A\x00") 
+        colourRGB!("FF2A00")
       end
 
       def off!
-        colour!("\x00\x00\x00") 
+        colourRGB!("000000")
       end
 
       def init
@@ -30,6 +30,10 @@ module Blinky
 
       def colour!(colour)
         send(colour + "\x00\x00\x00\x00\x05")  
+      end
+
+      def colourRGB!(colour)
+        colour!(colour.scan(/../).map(&:hex).map(&:chr).join)
       end
 
       private
