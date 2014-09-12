@@ -1,3 +1,5 @@
+require "colour/colour"
+
 module Blinky
   module DreamCheeky
     module WebmailNotifier
@@ -34,6 +36,10 @@ module Blinky
 
       def colourRGB!(colour)
         colour!(colour.scan(/../).map(&:hex).map(&:chr).join)
+      end
+
+      def score(colour)
+        colourRGB!(colour.hex.gsub("#", ""))
       end
 
       private
