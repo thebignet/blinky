@@ -37,7 +37,7 @@ module Crawler
 
    def watch_test_server url
       score = score(url,nil)
-      puts score
+      score
       # get colour(score)
       # set colour
     end

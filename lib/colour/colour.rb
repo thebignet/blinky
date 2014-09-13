@@ -4,6 +4,7 @@ module Colour
   class Colour
     @colour
     def initialize(score=0)
+      @score = score
       saturation=1.0
       luminance=0.5
       if(score>0 && score<100)
