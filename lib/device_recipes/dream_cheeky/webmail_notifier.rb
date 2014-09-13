@@ -30,15 +30,15 @@ module Blinky
         send "\x00\x00\x00\x2e\x00\x00\x2b\x05"
       end
 
-      def colour!(colour)
+      def colourHEX!(colour)
         send(colour + "\x00\x00\x00\x00\x05")  
       end
 
       def colourRGB!(colour)
-        colour!(colour.scan(/../).map(&:hex).map(&:chr).join)
+        colourHEX!(colour.scan(/../).map(&:hex).map(&:chr).join)
       end
 
-      def score(colour)
+      def colour!(colour)
         colourRGB!(colour.hex.gsub("#", ""))
       end
 
