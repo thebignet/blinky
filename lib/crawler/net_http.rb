@@ -22,21 +22,25 @@ module Crawler
       end
     end
     def score(jobJsonUrl, proxy = nil)
-      json = request_response(jobJsonUrl,proxy)
-      testAppli = JSON.parse(json);
       score = 0
-      if(!testAppli['color'].start_with?('red'))
-        for i in 0..1
-          if(testAppli['healthReport'][i]['description'].start_with?('Test Result'))
-           score = testAppli['healthReport'][i]['score'];
+      json = request_response(jobJsonUrl,proxy)
+      if(json==false)
+        puts 'Read error'
+      else
+        testAppli = JSON.parse(json);
+        if(!testAppli['color'].start_with?('red'))
+          for i in 0..1
+            if(testAppli['healthReport'][i]['description'].start_with?('Test Result'))
+             score = testAppli['healthReport'][i]['score'];
+           end
          end
        end
      end
      return score
    end
 
-   def watch_test_server url
-      score = score(url,nil)
+   def watch_test_server(url,proxy)
+      score = score(url,proxy)
       score
       # get colour(score)
       # set colour
