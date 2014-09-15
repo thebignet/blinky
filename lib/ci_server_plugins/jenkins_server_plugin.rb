@@ -4,7 +4,7 @@ require "net/http"
 
 module Blinky
   module JenkinsServer
-    def request_response(uri_str, proxy=nil, limit = 10)
+    def request_response uri_str, proxy=nil, limit = 10
       begin
         if proxy.nil?
           Net::HTTP.get(URI(uri_str))
@@ -22,7 +22,7 @@ module Blinky
         return false
       end
     end
-    def score(jobJsonUrl, proxy = nil)
+    def score jobJsonUrl, proxy = nil
       score = 0
       json = request_response(jobJsonUrl,proxy)
       if(json==false)
@@ -40,9 +40,11 @@ module Blinky
      return score
    end
 
-   def watch_test_server(url,proxy)
+   def watch_test_server url, proxy
       score = score(url,proxy)
+      print("score ",score,"\n")
       colour = Colour::Colour.new(score)
+      print("colour : ",colour.hex.gsub("#", ""),"\n")
       colour!(colour)
     end
 
