@@ -6,15 +6,15 @@ require "crawler/net_http"
 require "colour/colour"
 
 # Constantes
-proxy_host=nil
-proxy_port=nil
+proxy_host='localhost'
+proxy_port='3128'
 if(proxy_host!=nil)
   proxy=Net::HTTP::Proxy(proxy_host, proxy_port)
 else
   proxy=nil
 end
 
-jobJsonUrl='https://builds.apache.org/job/central-indexer-test/api/json'
+jobJsonUrl='http://in56sws01.rouen.francetelecom.fr:59600/job/Tests/api/json'
 
 blinky = Blinky.new
 if(!ARGV[0])
