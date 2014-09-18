@@ -14,11 +14,12 @@ else
   proxy=nil
 end
 
-jobJsonUrl='http://in56sws01.rouen.francetelecom.fr:59600/job/Tests/api/json'
+url_server='http://in56sws01.rouen.francetelecom.fr:59600'
+job='Tests'
 
 blinky = Blinky.new
 if(!ARGV[0])
-  blinky.lights[0].watch_test_server(jobJsonUrl,proxy)
+  blinky.lights[0].watch_test_server(url_server,proxy,job)
 else
   score = ARGV[0].to_i
   print("score ",score,"\n")
