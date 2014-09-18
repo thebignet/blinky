@@ -34,7 +34,7 @@ Or, with basic authentication
 
   light.watch_cctray_server http://your.ci.server/cctray.xml, {:user => 'user', :password => 'password'}  
   
-Or, watch a Jenkins job and colour-code state (blue = All good, red = failed, orange to green : tests from 1% to 99%)
+Or, watch a Jenkins job and colour-code state (blue = All good, red = failed, orange to green = tests from 1% to 99%)
 
   light.watch_test_server 'http://your.ci.server',nil,'myJob'
   
