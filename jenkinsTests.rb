@@ -14,11 +14,12 @@ else
   proxy=nil
 end
 
-jobJsonUrl='https://builds.apache.org/job/central-indexer-test/api/json'
+url_server='https://builds.apache.org'
+job='central-indexer-test'
 
 blinky = Blinky.new
 if(!ARGV[0])
-  blinky.lights[0].watch_test_server(jobJsonUrl,proxy)
+  blinky.lights[0].watch_test_server(url_server,proxy,job)
 else
   score = ARGV[0].to_i
   print("score ",score,"\n")

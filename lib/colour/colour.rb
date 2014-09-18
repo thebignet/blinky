@@ -17,8 +17,10 @@ module Colour
         #print("hue : ",colour.hue,"\n")
       elsif score==0
         @colour = ColorMath::HSL.new(0, saturation, luminance)
-      else
+      elsif score==100
         @colour = ColorMath::HSL.new(222, saturation, luminance)
+      else
+        @colour = ColorMath::HSL.new(0, saturation, 1.0)
       end
     end
     def hex

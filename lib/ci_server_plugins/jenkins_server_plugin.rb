@@ -22,26 +22,29 @@ module Blinky
         return false
       end
     end
-    def score jobJsonUrl, proxy = nil
+    def score url_server, proxy = nil, job
       score = 0
-      json = request_response(jobJsonUrl,proxy)
-      if(json==false)
+      json = request_response(url_server+'/job/'+job+'/lastBuild/api/json',proxy)
+      if !json
         puts 'request error'
       else
         testAppli = JSON.parse(json);
-        if(!testAppli['color'].start_with?('red'))
-          for i in 0..1
-            if(testAppli['healthReport'][i]['description'].start_with?('Test Result'))
-             score = testAppli['healthReport'][i]['score'];
-           end
-         end
-       end
-     end
-     return score
-   end
+        puts testAppli['actions'][4]
+        if testAppli['building'] == 'true'
+          score = -1
+        else
+          failCount = testAppli['actions'][4]['failCount'].to_i
+          print("failCount ",failCount,"\n")
+          totalCount = testAppli['actions'][4]['totalCount'].to_i
+          print("totalCount ",totalCount,"\n")
+          score = ((totalCount-failCount)*100/totalCount).floor
+        end
+      end
+      return score
+    end
 
-   def watch_test_server url, proxy
-      score = score(url,proxy)
+    def watch_test_server url_server, proxy, job
+      score = score(url_server,proxy,job)
       print("score ",score,"\n")
       colour = Colour::Colour.new(score)
       print("colour : ",colour.hex.gsub("#", ""),"\n")

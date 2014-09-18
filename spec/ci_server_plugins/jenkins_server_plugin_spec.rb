@@ -12,11 +12,72 @@ module Blinky
       @blinky.extend(JenkinsServer)
     end
 
-    it "get score with url and proxy" do
-      @blinky.should_receive(:score).with("SOME_URL", nil)
-      @blinky.stub(:score){100}
-      @blinky.should_receive(:colour!)
-      @blinky.watch_test_server("SOME_URL", nil)
+    it "show blue light with score 100" do
+      # Given
+      score = 100
+      colour = Colour::Colour.new(score)
+
+      # Stub
+      allow(@blinky).to receive(:score).and_return(score)
+      allow(Colour::Colour).to receive(:new).and_return(colour)
+
+      # Expect
+      expect(@blinky).to receive(:score).with("SOME_URL", nil, "SOME_JOB")
+      expect(@blinky).to receive(:colour!).with(colour)
+
+      # When
+      @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
+    end
+
+    it "show red light with score 0" do
+      # Given
+      score = 0
+      colour = Colour::Colour.new(score)
+
+      # Stub
+      allow(@blinky).to receive(:score).and_return(score)
+      allow(Colour::Colour).to receive(:new).and_return(colour)
+
+      # Expect
+      expect(@blinky).to receive(:score).with("SOME_URL", nil, "SOME_JOB")
+      expect(@blinky).to receive(:colour!).with(colour)
+
+      # When
+      @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
+    end
+
+    it "show green light with score 75" do
+      # Given
+      score = 75
+      colour = Colour::Colour.new(score)
+
+      # Stub
+      allow(@blinky).to receive(:score).and_return(score)
+      allow(Colour::Colour).to receive(:new).and_return(colour)
+
+      # Expect
+      expect(@blinky).to receive(:score).with("SOME_URL", nil, "SOME_JOB")
+      expect(@blinky).to receive(:colour!).with(colour)
+
+      # When
+      @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
+    end
+
+    it "show blue lagoon light with score 99" do
+      # Given
+      score = 99
+      colour = Colour::Colour.new(score)
+
+      # Stub
+      allow(@blinky).to receive(:score).and_return(score)
+      allow(Colour::Colour).to receive(:new).and_return(colour)
+
+      # Expect
+      expect(@blinky).to receive(:score).with("SOME_URL", nil, "SOME_JOB")
+      expect(@blinky).to receive(:colour!).with(colour)
+
+      # When
+      @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
     end
 
   end  
