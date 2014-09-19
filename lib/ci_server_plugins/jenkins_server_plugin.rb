@@ -29,15 +29,19 @@ module Blinky
         puts 'request error'
       else
         testAppli = JSON.parse(json);
-        puts testAppli['actions'][4]
         if testAppli['building'] == 'true'
           score = -1
         else
-          failCount = testAppli['actions'][4]['failCount'].to_i
+          actions = testAppli['actions']
+          failCount = actions.last['failCount'].to_i
           print("failCount ",failCount,"\n")
-          totalCount = testAppli['actions'][4]['totalCount'].to_i
+          totalCount = actions.last['totalCount'].to_i
           print("totalCount ",totalCount,"\n")
-          score = ((totalCount-failCount)*100/totalCount).floor
+          if(totalCount==0)
+            score = 0
+          else
+            score = ((totalCount-failCount)*100/totalCount).floor
+          end
         end
       end
       return score
