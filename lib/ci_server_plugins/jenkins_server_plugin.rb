@@ -29,7 +29,7 @@ module Blinky
         puts 'request error'
       else
         testAppli = JSON.parse(json);
-        if testAppli['building'] == 'true'
+        if testAppli['building'] == true
           score = -1
         else
           actions = testAppli['actions']
