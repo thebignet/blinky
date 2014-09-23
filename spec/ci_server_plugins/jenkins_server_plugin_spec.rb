@@ -80,5 +80,22 @@ module Blinky
       @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
     end
 
+    it "show white lagoon light with score -1" do
+      # Given
+      score = -1
+      colour = Colour::Colour.new(score)
+
+      # Stub
+      allow(@blinky).to receive(:score).and_return(score)
+      allow(Colour::Colour).to receive(:new).and_return(colour)
+
+      # Expect
+      expect(@blinky).to receive(:score).with("SOME_URL", nil, "SOME_JOB")
+      expect(@blinky).to receive(:colour!).with(colour)
+
+      # When
+      @blinky.watch_test_server("SOME_URL", nil, "SOME_JOB")
+    end
+
   end  
 end
