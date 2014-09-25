@@ -31,6 +31,8 @@ module Blinky
         testAppli = JSON.parse(json);
         if testAppli['building'] == true
           score = -1
+        elsif testAppli['result'] == "FAILURE"
+          score = 0
         else
           actions = testAppli['actions']
           failCount = actions.last['failCount'].to_i
