@@ -14,7 +14,7 @@ else
   proxy=nil
 end
 
-url_server='http://in56sws01.rouen.francetelecom.fr:59600'
+url_server='http://dvedvp65.rouen.francetelecom.fr:6900'
 job='Tests'
 
 blinky = Blinky.new
