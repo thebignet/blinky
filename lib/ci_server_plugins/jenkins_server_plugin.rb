@@ -25,19 +25,24 @@ module Blinky
     def score url_server, proxy = nil, job
       score = 0
       json = request_response(url_server+'/job/'+job+'/lastBuild/api/json',proxy)
+      print("url : ",url_server+'/job/'+job+'/lastBuild/api/json',"\n")
       if !json
         puts 'request error'
       else
         testAppli = JSON.parse(json);
         if testAppli['building'] == true
+          print("building\n")
           score = -1
         elsif testAppli['result'] == "FAILURE"
+          print("failure\n")
           score = 0
         else
+          print("checking score\n")
           actions = testAppli['actions']
-          failCount = actions.last['failCount'].to_i
+          stats = actions[actions.length-2]
+          failCount = stats['failCount'].to_i
           print("failCount ",failCount,"\n")
-          totalCount = actions.last['totalCount'].to_i
+          totalCount = stats['totalCount'].to_i
           print("totalCount ",totalCount,"\n")
           if(totalCount==0)
             score = 0
