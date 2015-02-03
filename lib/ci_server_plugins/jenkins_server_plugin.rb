@@ -39,7 +39,11 @@ module Blinky
         else
           print("checking score\n")
           actions = testAppli['actions']
-          stats = actions[actions.length-2]
+          index = 0
+          until actions[index].has_key?('failCount')
+            index = index + 1
+          end
+          stats = actions[index]
           failCount = stats['failCount'].to_i
           print("failCount ",failCount,"\n")
           totalCount = stats['totalCount'].to_i

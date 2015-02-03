@@ -6,6 +6,7 @@ require "crawler/net_http"
 require "colour/colour"
 
 # Constantes
+#proxy_host='localhost'
 proxy_host=nil
 proxy_port=nil
 if(proxy_host!=nil)
